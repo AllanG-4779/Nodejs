@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include("./partials/head.ejs") %>
+  <body>
+    <%- include("./partials/nav.ejs") %>
+    <div class="content">
+      <% if (posts.length > 0){%> <% posts.forEach(blog=>{%>
+      <div class="poststyle">
+        <a class="preview" href="/blogs/<%= blog._id %> ">
+          <h2 class="title"><%= blog.title %></h2>
+          <h5 class="preview"><%= blog.snippet %></h5>
+        </a>
+        <p class="blog"><%= blog.body.substring(0,100)+"..." %></p>
+      </div>
+      <% }) %> <% } else { %>
+
+      <h5>Nothing has been posted yet.</h5>
+
+      <% } %>
+    </div>
+    
+
+    <%-include("./partials/footer.ejs") %>
+  </body>
+</html>

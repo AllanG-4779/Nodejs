@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<%-include("./partials/head.ejs") %>
+ <%-include("./partials/nav.ejs") %>
+<body>
+  <div class="content">
+    <div style="background-color: white; margin-top: 10px; padding: 30px">
+      <div class="delete">
+        <h3><%=body.title %></h3>
+        <div>
+        <a class="del-btn" id="del" data-del="<%=body._id %>">Delete</a>
+       
+        </div>
+      </div>
+
+      <p style="color: rgb(199, 193, 193)"><%=body.createdAt%></p>
+      <p
+        style="
+          font-size: 20px;
+          font-family: Arial, Helvetica, sans-serif;
+          letter-spacing: 2px;
+        "
+      >
+        <%= body.body %>
+      </p>
+    </div>
+  </div>
+
+  <%-include("./partials/footer.ejs") %>
+  <script >
+    const trachCan = document.querySelector(".del-btn");
+trachCan.addEventListener("click", () => {
+  const endpoint = `/blogs/${trachCan.dataset.del}`;
+  fetch(endpoint, { method: "DELETE" })
+    .then((response) => {
+      response.json().then((done) => (window.location.href = done.redirect));
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+});
+  </script>
+</body>
+</html
